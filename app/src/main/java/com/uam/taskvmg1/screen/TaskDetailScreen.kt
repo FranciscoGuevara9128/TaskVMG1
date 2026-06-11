@@ -32,9 +32,10 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.uam.taskvmg1.model.Task
+import com.uam.taskvmg1.model.TaskItem
 
 import com.uam.taskvmg1.vmodel.TaskViewModel
+import okhttp3.internal.concurrent.Task
 
 
 @Composable
@@ -156,8 +157,8 @@ fun TaskDetailScreen(
                         modifier = Modifier.weight(1f),
                         onClick = {
                             viewModel.addTask(
-                                Task(
-                                    id = viewModel.id.toInt(),
+                                TaskItem(
+                                    id = viewModel.id,
                                     title = viewModel.title,
                                     description = viewModel.description,
                                     completed = viewModel.completed

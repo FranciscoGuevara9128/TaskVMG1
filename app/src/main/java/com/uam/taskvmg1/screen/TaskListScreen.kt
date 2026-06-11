@@ -85,7 +85,7 @@ fun TaskListScreen(navController: NavController,
                             .fillMaxWidth()
                             .clickable()
                             {
-                                navController.navigate(TaskDetail(viewModel.tasks[it].id))
+                                navController.navigate(TaskDetail(viewModel.tasks[it].id.toInt()))
                             }
 
                     )

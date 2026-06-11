@@ -5,13 +5,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import com.uam.taskvmg1.model.Task
+import com.uam.taskvmg1.model.TaskItem
 import com.uam.taskvmg1.repository.TaskRepository
+import okhttp3.internal.concurrent.Task
 
 class TaskViewModel : ViewModel() {
 
     private val repository = TaskRepository()
-    var tasks by mutableStateOf(listOf<Task>())
+
+    var tasks by mutableStateOf(listOf<TaskItem>())
         private set
     var id by mutableStateOf("")
         private set
@@ -31,8 +33,8 @@ class TaskViewModel : ViewModel() {
         tasks = repository.getTask()
     }
 
-    fun loadTask(taskId: Int){
-        if (taskId == -1){
+    fun loadTask(taskId: String){
+        if (taskId == "-1"){
             clearForm()
             return
         } else {
@@ -46,7 +48,7 @@ class TaskViewModel : ViewModel() {
         }
     }
 
-    fun getTaskId(taskId: Int): Task? {
+    fun getTaskId(taskId: String): TaskItem? {
         return repository.getTaskById(taskId)
     }
 
@@ -57,17 +59,17 @@ class TaskViewModel : ViewModel() {
         completed = false
     }
 
-    fun addTask(task: Task) {
+    fun addTask(task: TaskItem) {
         repository.addTask(task)
         loadTask()
     }
 
-    fun deleteTask(taskId: Int){
+    fun deleteTask(taskId: String){
         repository.deleteTask(taskId)
         loadTask()
     }
 
-    fun updateTask(task: Task){
+    fun updateTask(task: TaskItem){
         repository.updateTask(task)
         loadTask()
     }
