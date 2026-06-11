@@ -45,7 +45,7 @@ fun TaskDetailScreen(
     viewModel: TaskViewModel = viewModel()
 ) {
     LaunchedEffect(taskId) {
-        viewModel.loadTask(taskId)
+        viewModel.loadTask(taskId.toString())
     }
     Column(
         modifier = Modifier
