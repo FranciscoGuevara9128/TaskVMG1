@@ -1,21 +1,19 @@
 package com.uam.taskvmg1.vmodel
 
-import android.service.notification.Condition.newId
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import com.uam.taskvmg1.model.TaskItem
+import com.uam.taskvmg1.model.Task
 import com.uam.taskvmg1.repository.TaskRepository
-import okhttp3.internal.concurrent.Task
 
 class TaskViewModel : ViewModel() {
 
     private val repository = TaskRepository()
 
-    var tasks by mutableStateOf(listOf<TaskItem>())
+    var tasks by mutableStateOf(listOf<Task>())
         private set
-    var id by mutableStateOf("")
+    var id by mutableStateOf(0)
         private set
     var title by mutableStateOf("")
         private set
@@ -33,14 +31,14 @@ class TaskViewModel : ViewModel() {
         tasks = repository.getTask()
     }
 
-    fun loadTask(taskId: String){
-        if (taskId == "-1"){
+    fun loadTask(taskId: Int){
+        if (taskId == -1){
             clearForm()
             return
         } else {
             val task = repository.getTaskById(taskId)
             task?.let {
-                id = it.id.toString()
+                id = it.id
                 title = it.title
                 description = it.description
                 completed = it.completed
@@ -48,33 +46,33 @@ class TaskViewModel : ViewModel() {
         }
     }
 
-    fun getTaskId(taskId: String): TaskItem? {
+    fun getTaskId(taskId: Int): Task? {
         return repository.getTaskById(taskId)
     }
 
     fun clearForm(){
-        id = ""
+        id = 0
         title = ""
         description = ""
         completed = false
     }
 
-    fun addTask(task: TaskItem) {
+    fun addTask(task: Task) {
         repository.addTask(task)
         loadTask()
     }
 
-    fun deleteTask(taskId: String){
+    fun deleteTask(taskId: Int){
         repository.deleteTask(taskId)
         loadTask()
     }
 
-    fun updateTask(task: TaskItem){
+    fun updateTask(task: Task){
         repository.updateTask(task)
         loadTask()
     }
 
-    fun onIdChange(value: String){
+    fun onIdChange(value: Int){
         id = value
     }
 

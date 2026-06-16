@@ -1,8 +1,8 @@
 package com.uam.taskvmg1.model
 
-data class TaskItem(
+data class Task(
     val completed: Boolean,
     val description: String,
-    val id: String,
+    val id: Int,
     val title: String
 )
