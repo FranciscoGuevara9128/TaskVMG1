@@ -22,6 +22,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -38,7 +39,7 @@ fun TaskListScreen(
     viewModel: TaskListViewModel)
 {
 
-    val state = viewModel.state.collectAsState()
+    val state by viewModel.state.collectAsState()
 
     Scaffold(
         modifier = Modifier.fillMaxSize()
@@ -103,7 +104,7 @@ fun TaskListScreen(
                                     horizontalArrangement = Arrangement.SpaceBetween
                                     ,verticalAlignment = Alignment.CenterVertically
                                 ) {
-                                    Text(currentState.tasks[it].id)
+                                    // Text(currentState.tasks[it].id)
                                     Text(currentState.tasks[it].title)
                                     Checkbox(
                                         checked = currentState.tasks[it].completed,
