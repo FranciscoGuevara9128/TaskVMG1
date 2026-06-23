@@ -5,15 +5,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.uam.taskvmg1.model.Task
-import com.uam.taskvmg1.repository.TaskRepository
+import com.uam.taskvmg1.repository.TaskRepositoryOld
+
 
 class TaskViewModel : ViewModel() {
 
-    private val repository = TaskRepository()
+    private val repository = TaskRepositoryOld()
 
     var tasks by mutableStateOf(listOf<Task>())
         private set
-    var id by mutableStateOf(0)
+    var id by mutableStateOf("")
         private set
     var title by mutableStateOf("")
         private set
@@ -27,12 +28,13 @@ class TaskViewModel : ViewModel() {
     init{
         loadTask()
     }
-    private fun loadTask() {
+
+    private fun loadTask(){
         tasks = repository.getTask()
     }
 
-    fun loadTask(taskId: Int){
-        if (taskId == -1){
+    fun loadTask(taskId: String){
+        if (taskId == ""){
             clearForm()
             return
         } else {
@@ -46,12 +48,12 @@ class TaskViewModel : ViewModel() {
         }
     }
 
-    fun getTaskId(taskId: Int): Task? {
+    fun getTaskId(taskId: String): Task? {
         return repository.getTaskById(taskId)
     }
 
     fun clearForm(){
-        id = 0
+        id = ""
         title = ""
         description = ""
         completed = false
@@ -62,7 +64,7 @@ class TaskViewModel : ViewModel() {
         loadTask()
     }
 
-    fun deleteTask(taskId: Int){
+    fun deleteTask(taskId: String){
         repository.deleteTask(taskId)
         loadTask()
     }
@@ -72,7 +74,7 @@ class TaskViewModel : ViewModel() {
         loadTask()
     }
 
-    fun onIdChange(value: Int){
+    fun onIdChange(value: String){
         id = value
     }
 

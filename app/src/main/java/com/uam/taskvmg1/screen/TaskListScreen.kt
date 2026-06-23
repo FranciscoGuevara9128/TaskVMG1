@@ -103,7 +103,7 @@ fun TaskListScreen(
                                     horizontalArrangement = Arrangement.SpaceBetween
                                     ,verticalAlignment = Alignment.CenterVertically
                                 ) {
-                                    Text(currentState.tasks[it].id.toString())
+                                    Text(currentState.tasks[it].id)
                                     Text(currentState.tasks[it].title)
                                     Checkbox(
                                         checked = currentState.tasks[it].completed,

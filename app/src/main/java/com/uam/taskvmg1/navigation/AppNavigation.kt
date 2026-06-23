@@ -34,7 +34,8 @@
             composable<TaskDetail>{ backStackEntry ->
                 val route = backStackEntry.toRoute<TaskDetail>()
                 TaskDetailScreen(navController = navController,
-                    taskId = route.taskId)
+                    taskId = route.taskId.toString()
+                )
             }
 
         }
