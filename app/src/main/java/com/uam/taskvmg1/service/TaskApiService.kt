@@ -12,8 +12,8 @@ interface TaskApiService {
     suspend fun findAll():
             Response<List<Task>>
 
-    @GET("task/getId/{id}")
-    suspend fun findById(@Path("id") id: Int):
+    @GET("task/get/{id}")
+    suspend fun findById(@Path("id") id: String):
             Response<Task>
 
     @POST("task/save")

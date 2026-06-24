@@ -10,6 +10,8 @@
     import com.uam.taskvmg1.screen.TaskDetailScreen
     import com.uam.taskvmg1.screen.TaskListScreen
     import com.uam.taskvmg1.service.ServiceLocator
+    import com.uam.taskvmg1.vmodel.TaskDetailViewModel
+    import com.uam.taskvmg1.vmodel.TaskDetailViewModelFactory
     import com.uam.taskvmg1.vmodel.TaskListViewModel
     import com.uam.taskvmg1.vmodel.TaskListViewModelFactory
 
@@ -32,9 +34,15 @@
                 TaskListScreen(navController = navController,viewModel)
             }
             composable<TaskDetail>{ backStackEntry ->
+                val viewDetailModel : TaskDetailViewModel = viewModel(
+                    factory = TaskDetailViewModelFactory(
+                        ServiceLocator.repository
+                    )
+                )
                 val route = backStackEntry.toRoute<TaskDetail>()
                 TaskDetailScreen(navController = navController,
-                    taskId = route.taskId.toString()
+                    viewDetailModel,
+                    taskId = route.taskId
                 )
             }
 

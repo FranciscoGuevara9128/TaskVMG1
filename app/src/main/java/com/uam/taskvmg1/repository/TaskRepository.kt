@@ -19,7 +19,7 @@ class TaskRepository(private val api: TaskApiService) {
         }
     }
 
-     suspend fun findById(id: Int): ApiResult<Task> {
+     suspend fun findById(id: String): ApiResult<Task> {
         return try {
             val response = api.findById(id)
             if (response.isSuccessful) {

@@ -8,6 +8,6 @@ object TaskList{
 }
 
 @Serializable
-data class TaskDetail(val taskId: Int){
+data class TaskDetail(val taskId: String){
 }
 
